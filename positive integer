@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void printDivisors(int n) {
+    std::vector<int> divisors;
+    for (int i = 1; i <= n; ++i) {
+        if (n % i == 0) {
+            divisors.push_back(i);
+        }
+    }
+    // Sort divisors in decreasing order
+    std::sort(divisors.begin(), divisors.end(), std::greater<int>());
+    
+    std::cout << "Divisors of " << n << " in decreasing order:" << std::endl;
+    for (int divisor : divisors) {
+        std::cout << divisor << std::endl;
+    }
+}
+
+int main() {
+    int num;
+    char choice;
+
+    std::cout << "This program reads a positive integer and prints its divisors in decreasing order." << std::endl;
+    std::cout << "You can terminate the program by entering a zero or negative integer." << std::endl;
+
+    do {
+        std::cout << "Please enter a positive integer: ";
+        std::cin >> num;
+
+        // Check for termination condition
+        if (num <= 0) {
+            std::cout << "Program terminated." << std::endl;
+            break;
+        }
+
+        // Print divisors if input is valid
+        printDivisors(num);
+
+        // Ask the user if they want to continue
+        std::cout << "Would you like to enter another number? (y/n): ";
+        std::cin >> choice;
+
+        // If the user enters a negative or zero integer after a valid entry
+        while (choice != 'n' && choice != 'y') {
+            std::cout << "Invalid choice. Please enter 'y' to continue or 'n' to quit: ";
+            std::cin >> choice;
+        }
+    } while (choice == 'y');
+
+    std::cout << "Goodbye!" << std::endl;
+    return 0;
+}
